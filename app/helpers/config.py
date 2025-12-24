@@ -8,7 +8,9 @@ class Settings(BaseSettings):
     MAX_FILE_SIZE: int = 10485760  # 10MB
     FILE_CHUNK_SIZE: int = 1048576  # 1MB
 
-
+    MONGODB_URL: str
+    MONGODB_DATABASE: str
+    
 
     class Config:
         env_file = ".env"

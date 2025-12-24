@@ -3,7 +3,7 @@ from .BaseController import BaseController
 from .project_controller import ProjectController
 import re
 import os
-from app.models.enums import response_signal
+from app.models.enums.response_signal import ResponseSignal
 
 class DataController(BaseController):
     def __init__(self):
@@ -12,18 +12,20 @@ class DataController(BaseController):
             
     def validate_upload_file(self, file:UploadFile):
         if file.content_type not in self.app_settings.FILE_ALLOWED_TYPES:
-            return False , response_signal.FILE_TYPE_NOT_ALLOWED.value
+            return False , ResponseSignal.FILE_TYPE_NOT_ALLOWED.value
         if file.size > self.app_settings.MAX_FILE_SIZE:
-            return False , response_signal.FILE_SIZE_EXCEEDED.value
+            return False , ResponseSignal.FILE_SIZE_EXCEEDED.value
 
-        return True , response_signal.FILE_VALIDATION_SUCCESS.value
+        return True , ResponseSignal.FILE_VALIDATION_SUCCESS.value
 
 
-    def  generate_unique_filename(self,orig_file_name:str,project_id:str ):
+    def  generate_unique_file_path(self,orig_file_name:str,project_id:str ):
         random_key = self.generate_random_string()
         project_path = ProjectController().get_project_path(project_id=project_id)
 
-        clean_file_name = self.get_clean_filename(orig_file_name=orig_file_name)
+        clean_file_name = self.get_clean_filename(
+            orig_file_name=orig_file_name
+            )
 
         new_file_name = os.path.join(
             project_path,   
@@ -36,8 +38,9 @@ class DataController(BaseController):
                 project_path,
                 random_key+"_"+clean_file_name
             )
-
-        return new_file_name, random_key
+        
+        file_id = random_key+"_"+clean_file_name
+        return new_file_name, file_id
 
 
 

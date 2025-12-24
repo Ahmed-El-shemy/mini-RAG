@@ -10,3 +10,6 @@ wheels/
 .venv
 .env
 .env.example
+
+# Docker database files
+docker/mongodb/
