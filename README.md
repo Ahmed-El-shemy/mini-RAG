@@ -57,6 +57,48 @@ mini-RAG/
    FILDE_ALLOWED_TYPES=["application/pdf", "text/plain"]
    ```
 
+## Run docker compose Services
+
+```bash
+ $ cd docker 
+ $ cp .env.example .env
+ $ docker-compose up -d
+```
+
+ -update '.env' with your cerdentials
+
+## stop docker compose Services
+
+```bash
+ $ sudo docker stop $(sudo docker ps -aq )
+```
+
+## remove docker compose Services
+
+```bash
+ $ sudo docker rm $(sudo docker ps -aq )
+```
+
+
+## remove docker images
+
+```bash
+ $ sudo docker rmi $(sudo docker images -q)
+```
+
+## remove docker volumes
+
+```bash
+ $ sudo docker volume rm $(sudo docker volume ls -q)
+```
+
+## remove all docker
+
+```bash
+ $ sudo docker system prune --all
+```
+
+
 ## Running the App
 
 Run the server using `uvicorn` from the project root:

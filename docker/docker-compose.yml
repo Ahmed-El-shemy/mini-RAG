@@ -5,11 +5,27 @@ services:
     ports:
       - "27018:27017"
     volumes:
-      - ./mongodb:/data/db
+      - mongodata:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     networks:
       - backend
     restart: always
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
 
 networks:
   backend:
     driver: bridge
+
+volumes:
+  mongodata:

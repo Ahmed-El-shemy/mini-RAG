@@ -3,7 +3,7 @@ from .BaseController import BaseController
 from .project_controller import ProjectController
 import re
 import os
-from app.models.enums.response_signal import ResponseSignal
+from src.models.enums.response_signal import ResponseSignal
 
 class DataController(BaseController):
     def __init__(self):

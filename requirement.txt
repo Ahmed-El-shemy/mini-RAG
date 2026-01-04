@@ -8,5 +8,8 @@ langchain-community
 PyMuPDF == 1.26.7
 motor == 3.7.1
 aiofiles == 25.1.0
+openai == 2.14.0
+cohere == 5.20.1
+
 
 

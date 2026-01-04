@@ -1,7 +1,7 @@
 from fastapi import FastAPI ,APIRouter
-from app.routes import base, data
+from src.routes import base, data
 from motor.motor_asyncio import AsyncIOMotorClient
-from app.helpers.config import get_settings
+from src.helpers.config import get_settings
 
 app = FastAPI()
 @app.on_event("startup")
